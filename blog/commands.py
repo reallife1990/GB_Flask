@@ -1,6 +1,5 @@
 import click
 from werkzeug.security import generate_password_hash
-
 from blog.extensions import db
 
 
@@ -21,6 +20,8 @@ def create_init_user():
 
     with app.app_context():
         db.session.add(
-            User(email='name@example.com', password=generate_password_hash('test123'))
+            User(email='name@example.com', password=generate_password_hash('test123'),first_name='',last_name='')
         )
         db.session.commit()
+
+
