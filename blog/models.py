@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
+    is_staff = db.Column(db.Boolean, default=False)
 
     # поле (класс связи, uselist-False : один к одному, класс обратной связи)
     author = relationship('Author', uselist=False, back_populates='user')
