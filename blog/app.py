@@ -3,6 +3,8 @@ from combojsonapi.spec import ApiSpecPlugin
 from blog import commands
 from blog.extensions import db, login_manager, migrate, csrf, admin, api
 from blog.models import User
+from combojsonapi.event import EventPlugin
+from combojsonapi.permission import PermissionPlugin
 
 
 def create_app() -> Flask:
@@ -12,7 +14,7 @@ def create_app() -> Flask:
     register_extensions(app)
     register_blueprints(app)
     register_commands(app)
-    register_api_routes()
+    #register_api_routes()
     return app
 
 
@@ -22,7 +24,10 @@ def register_extensions(app):
     csrf.init_app(app)
     admin.init_app(app)
 
+
     api.plugins = [
+        EventPlugin(),
+        PermissionPlugin(),
         ApiSpecPlugin(
             app=app,
             tags={
@@ -49,12 +54,14 @@ def register_blueprints(app: Flask):
     from blog.user.views import user
     from blog.author.views import author
     from blog.articles.views import article
+    from blog.api.views import api_blueprint
     from blog import admin
 
     app.register_blueprint(user)
     app.register_blueprint(auth)
     app.register_blueprint(author)
     app.register_blueprint(article)
+    app.register_blueprint(api_blueprint)
     admin.register_views()
 
 
