@@ -7,3 +7,4 @@ pip install -r requirements.txt
 
 flask db upgrade
 flask create-init-tags
+flask create-init-user
