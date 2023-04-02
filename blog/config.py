@@ -10,6 +10,8 @@ ENV = os.getenv('FLASK_ENV', default=EnvType.production)
 DEBUG = ENV == EnvType.development
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+URL_API = os.getenv('URL_API')
+    #'http://127.0.0.1:5000/'
 
 SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
